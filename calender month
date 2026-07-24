@@ -1,0 +1,41 @@
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.Scanner;
+
+public class MonthlyCalendar {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+      System.out.print("Enter year (e.g., 2026): ");
+        int year = scanner.nextInt();
+        System.out.print("Enter month (1-12): ");
+        int month = scanner.nextInt();
+
+      
+        YearMonth yearMonthObject = YearMonth.of(year, month);
+        int daysInMonth = yearMonthObject.lengthOfMonth();
+        
+        
+        LocalDate firstOfMonth = yearMonthObject.atDay(1);
+        int dayOfWeekValue = firstOfMonth.getDayOfWeek().getValue();
+
+        
+        System.out.println("\n  " + yearMonthObject.getMonth() + " " + year);
+        System.out.println(" Mo Tu We Th Fr Sa Su");
+        for (int i = 1; i < dayOfWeekValue; i++) {
+            System.out.print("   ");
+        }
+
+        
+        for (int day = 1; day <= daysInMonth; day++) {
+            System.out.printf("%3d", day);
+
+         
+            if ((day + dayOfWeekValue - 1) % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println(); 
+        scanner.close();
+    }
+}
+
